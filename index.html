@@ -5,23 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WEALTH Framework™ Assessment</title>
   
-  <!-- PT Serif Font Import -->
+  <!-- PT Serif & Inter Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-color: #0b1320;
-      --card-bg: #111a2e;
-      --accent-gold: #d4af37;
+      /* Softer, warm light theme to reduce eye strain */
+      --bg-color: #f7f8fa;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --accent-gold: #b48312;
+      --accent-navy: #0f172a;
       --accent-teal: #0f766e;
-      --text-main: #f3f4f6;
-      --text-muted: #9ca3af;
-      --border-color: #1f293d;
+      --border-color: #e2e8f0;
+      --focus-glow: rgba(15, 118, 110, 0.15);
     }
 
     * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
@@ -32,16 +39,77 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Elegant Serif Heading Typography */
+    /* Headings Typography */
     h1, h2, h3, .serif-font {
       font-family: 'PT Serif', Georgia, serif;
     }
 
     header {
-      background: linear-gradient(180deg, #070c16 0%, var(--bg-color) 100%);
-      padding: 60px 20px 40px;
+      background: var(--accent-navy);
+      color: #ffffff;
+      padding: 50px 20px 30px;
       text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 2.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      font-family: 'PT Serif', serif;
+      font-style: italic;
+      color: #ebd08d;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Sticky Navigation Bar */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #ffffff;
       border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .nav-container {
+      width: min(840px, calc(100% - 40px));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-family: 'PT Serif', serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-navy);
+      background-color: #f1f5f9;
+    }
+
+    .progress-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
     }
 
     .container {
@@ -49,38 +117,22 @@
       margin: auto;
     }
 
-    header h1 {
-      margin: 0 0 12px;
-      font-size: 2.8rem;
-      letter-spacing: -0.5px;
-      color: #ffffff;
-    }
-
-    header p {
-      font-family: 'PT Serif', serif;
-      font-style: italic;
-      color: var(--accent-gold);
-      font-size: 1.15rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
     .intro {
-      margin: 32px 0;
-      padding: 24px;
+      margin: 32px 0 20px;
+      padding: 20px 24px;
       background: var(--card-bg);
       border: 1px solid var(--border-color);
-      border-radius: 12px;
+      border-radius: 10px;
       text-align: center;
     }
 
     .intro strong {
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      font-size: 0.85rem;
+      letter-spacing: 1.2px;
+      font-size: 0.8rem;
       color: var(--accent-gold);
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .intro p {
@@ -90,107 +142,143 @@
     }
 
     .section {
-      margin: 28px 0;
-      padding: 32px;
+      margin: 24px 0;
+      padding: 28px 32px;
       background: var(--card-bg);
       border: 1px solid var(--border-color);
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+      scroll-margin-top: 60px;
     }
 
     .section-heading {
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding-bottom: 16px;
+      gap: 14px;
+      padding-bottom: 14px;
       border-bottom: 1px solid var(--border-color);
     }
 
     .letter {
       font-family: 'PT Serif', serif;
-      color: var(--accent-gold);
-      font-size: 2.4rem;
+      color: var(--accent-teal);
+      font-size: 2.2rem;
       font-weight: 700;
       line-height: 1;
     }
 
     .section-heading h2 {
       margin: 0;
-      font-size: 1.5rem;
-      color: #ffffff;
-      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--accent-navy);
     }
 
     .question {
-      margin-top: 28px;
+      margin-top: 24px;
     }
 
     .question h3 {
       margin: 0 0 6px;
-      font-size: 1.15rem;
-      color: #e5e7eb;
+      font-size: 1.05rem;
+      color: var(--text-main);
       font-weight: 400;
     }
 
     .hint {
       color: var(--text-muted);
       font-size: 0.85rem;
-      margin: 0 0 12px;
+      margin: 0 0 10px;
     }
 
     select {
       width: 100%;
-      margin-top: 8px;
-      padding: 14px 16px;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      background: #0b1320;
-      color: #f3f4f6;
+      margin-top: 6px;
+      padding: 12px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #ffffff;
+      color: var(--text-main);
       font-size: 0.95rem;
       font-family: 'Inter', sans-serif;
       cursor: pointer;
       transition: all 0.2s ease;
       appearance: none;
-      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f766e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
       background-repeat: no-repeat;
-      background-position: right 16px center;
+      background-position: right 14px center;
       background-size: 16px;
     }
 
     select:focus {
       outline: none;
-      border-color: var(--accent-gold);
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+      border-color: var(--accent-teal);
+      box-shadow: 0 0 0 3px var(--focus-glow);
     }
 
+    /* Action Buttons Area */
+    .action-area {
+      text-align: center;
+      margin: 36px 0;
+    }
+
+    .btn-submit {
+      padding: 14px 32px;
+      border: none;
+      border-radius: 6px;
+      background: var(--accent-teal);
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(15, 118, 110, 0.25);
+      transition: all 0.2s ease;
+    }
+
+    .btn-submit:hover {
+      background: #0d655e;
+      transform: translateY(-1px);
+    }
+
+    .error-msg {
+      color: #dc2626;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* Hidden Results Card */
     .results {
-      margin-top: 40px;
+      display: none; /* Controlled by JS */
+      margin: 30px 0 60px;
       padding: 36px;
-      background: linear-gradient(180deg, #131f37 0%, var(--card-bg) 100%);
-      border: 1px solid var(--accent-gold);
+      background: #ffffff;
+      border: 2px solid var(--accent-teal);
       border-radius: 12px;
       text-align: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      scroll-margin-top: 70px;
     }
 
     .results h2 {
       margin: 0;
       font-size: 1.8rem;
-      color: #ffffff;
+      color: var(--accent-navy);
     }
 
     .score-number {
-      margin: 16px 0;
+      margin: 12px 0;
       font-family: 'PT Serif', serif;
-      color: var(--accent-gold);
-      font-size: 3.8rem;
+      color: var(--accent-teal);
+      font-size: 3.5rem;
       font-weight: 700;
     }
 
     #rating {
       font-family: 'PT Serif', serif;
-      font-size: 1.35rem;
-      color: #ffffff;
-      margin-bottom: 6px;
+      font-size: 1.3rem;
+      color: var(--accent-navy);
+      font-weight: bold;
+      margin-bottom: 4px;
     }
 
     #interpretation {
@@ -201,20 +289,20 @@
 
     table {
       width: 100%;
-      margin-top: 24px;
+      margin-top: 20px;
       border-collapse: collapse;
       text-align: left;
     }
 
     th, td {
-      padding: 14px 12px;
+      padding: 12px 10px;
       border-bottom: 1px solid var(--border-color);
     }
 
     th {
-      color: var(--accent-gold);
+      color: var(--text-muted);
       font-size: 0.75rem;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
     }
 
@@ -225,32 +313,30 @@
 
     td { font-size: 0.9rem; }
 
-    button {
+    .btn-reset {
       margin-top: 28px;
-      padding: 12px 28px;
-      border: 1px solid var(--accent-gold);
+      padding: 10px 22px;
+      border: 1px solid #cbd5e1;
       border-radius: 6px;
       background: transparent;
-      color: var(--accent-gold);
-      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
       font-weight: 600;
-      letter-spacing: 0.5px;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    button:hover {
-      background: var(--accent-gold);
-      color: #0b1320;
+    .btn-reset:hover {
+      background: #f1f5f9;
+      color: var(--text-main);
     }
-
-    main { padding-bottom: 60px; }
 
     @media (max-width: 600px) {
       header h1 { font-size: 2.1rem; }
       .section, .results { padding: 20px; }
       .score-number { font-size: 2.8rem; }
-      th, td { padding: 10px 4px; font-size: 0.8rem; }
+      .nav-links { gap: 6px; }
+      .nav-links a { font-size: 0.85rem; padding: 2px 4px; }
     }
   </style>
 </head>
@@ -259,20 +345,35 @@
   <header>
     <div class="container">
       <h1>The WEALTH Framework™</h1>
-      <p>Is your equity working for your future, or is your future tied to a single stock?</p>
+      <p>Is your equity working for your future, or is your future dependent on one stock?</p>
     </div>
   </header>
+
+  <!-- Navigation Bar -->
+  <div class="sticky-nav">
+    <div class="nav-container">
+      <div class="nav-links">
+        <a href="#sec-w">W</a>
+        <a href="#sec-e">E</a>
+        <a href="#sec-a">A</a>
+        <a href="#sec-l">L</a>
+        <a href="#sec-t">T</a>
+        <a href="#sec-h">H</a>
+      </div>
+      <div class="progress-text">Progress: <span id="progress-count">0</span> / 10</div>
+    </div>
+  </div>
 
   <main class="container">
     <section class="intro">
       <strong>Executive Self-Assessment</strong>
-      <p>Select the option that best reflects your financial landscape. (Scale: 1 = Low Risk to 5 = High Concentration)</p>
+      <p>Select the option that best reflects your situation, then click Calculate at the bottom.</p>
     </section>
 
     <form id="wealthForm">
 
       <!-- W SECTION -->
-      <section class="section">
+      <section id="sec-w" class="section">
         <div class="section-heading"><span class="letter">W</span><h2>Wealth Concentration</h2></div>
 
         <div class="question">
@@ -302,7 +403,7 @@
       </section>
 
       <!-- E SECTION -->
-      <section class="section">
+      <section id="sec-e" class="section">
         <div class="section-heading"><span class="letter">E</span><h2>Employment Risk</h2></div>
 
         <div class="question">
@@ -331,7 +432,7 @@
       </section>
 
       <!-- A SECTION -->
-      <section class="section">
+      <section id="sec-a" class="section">
         <div class="section-heading"><span class="letter">A</span><h2>Aspirations</h2></div>
 
         <div class="question">
@@ -360,7 +461,7 @@
       </section>
 
       <!-- L SECTION -->
-      <section class="section">
+      <section id="sec-l" class="section">
         <div class="section-heading"><span class="letter">L</span><h2>Liquidity &amp; Legacy</h2></div>
 
         <div class="question">
@@ -389,7 +490,7 @@
       </section>
 
       <!-- T SECTION -->
-      <section class="section">
+      <section id="sec-t" class="section">
         <div class="section-heading"><span class="letter">T</span><h2>Tax Strategy</h2></div>
 
         <div class="question">
@@ -406,7 +507,7 @@
       </section>
 
       <!-- H SECTION -->
-      <section class="section">
+      <section id="sec-h" class="section">
         <div class="section-heading"><span class="letter">H</span><h2>Holistic Diversification</h2></div>
 
         <div class="question">
@@ -422,12 +523,18 @@
         </div>
       </section>
 
-      <!-- RESULTS DISPLAY -->
-      <section class="results">
+      <!-- Submit Action Button Area -->
+      <div class="action-area">
+        <button type="button" class="btn-submit" onclick="calculateScore()">Calculate My WEALTH Score</button>
+        <div id="errorMsg" class="error-msg">Please answer all 10 questions before calculating your score.</div>
+      </div>
+
+      <!-- RESULTS DISPLAY (Hidden initially) -->
+      <section id="resultsCard" class="results">
         <h2>Your WEALTH Score™</h2>
-        <div class="score-number"><span id="totalScore">0</span> <span style="font-size: 1.8rem; color: #6b7280;">/ 50</span></div>
-        <div id="rating">Complete all 10 questions to view assessment.</div>
-        <p id="interpretation">Your score will calculate automatically as you complete each field.</p>
+        <div class="score-number"><span id="totalScore">0</span> <span style="font-size: 1.6rem; color: var(--text-muted);">/ 50</span></div>
+        <div id="rating">Assessment Complete</div>
+        <p id="interpretation">Interpretation will appear here.</p>
 
         <table>
           <thead>
@@ -440,13 +547,17 @@
           <tbody id="dashboard"></tbody>
         </table>
 
-        <button type="reset">Reset Assessment</button>
+        <button type="reset" class="btn-reset" onclick="resetAssessment()">Reset Assessment</button>
       </section>
+
     </form>
   </main>
 
   <script>
     const form = document.getElementById("wealthForm");
+    const resultsCard = document.getElementById("resultsCard");
+    const errorMsg = document.getElementById("errorMsg");
+    const progressCount = document.getElementById("progress-count");
 
     const dimensions = {
       W: { name: "Wealth Concentration", questions: ["q1", "q2"], max: 10 },
@@ -457,6 +568,14 @@
       H: { name: "Holistic Diversification", questions: ["q10"], max: 5 }
     };
 
+    function updateProgress() {
+      let answered = 0;
+      for (let i = 1; i <= 10; i++) {
+        if (form.elements["q" + i].value !== "") answered++;
+      }
+      progressCount.textContent = answered;
+    }
+
     function status(score, max) {
       if (score / max <= 0.4) return "Low Risk";
       if (score / max <= 0.6) return "Moderate Risk";
@@ -464,11 +583,7 @@
       return "High Risk";
     }
 
-    function assessmentResult(score, complete) {
-      if (!complete) {
-        return ["Complete all 10 questions to view assessment.",
-                "Your score will calculate automatically as you complete each field."];
-      }
+    function assessmentResult(score) {
       if (score <= 15) return ["Fortress Portfolio", "Excellent diversification and structured risk control."];
       if (score <= 22) return ["Well Positioned", "Solid balance between growth and risk. Keep monitoring concentration."];
       if (score <= 30) return ["Growing Concentration", "Your wealth is increasingly reliant on one company."];
@@ -476,46 +591,58 @@
       return ["Critical Concentration", "High dependency on single-company stock across career and wealth."];
     }
 
-    function updateScore() {
+    function calculateScore() {
       let total = 0;
       let answered = 0;
       let rows = "";
 
       for (const [key, dimension] of Object.entries(dimensions)) {
         let dimensionScore = 0;
-        let dimensionAnswered = 0;
 
         dimension.questions.forEach(question => {
           const value = Number(form.elements[question].value);
           if (value) {
             dimensionScore += value;
-            dimensionAnswered++;
             total += value;
             answered++;
           }
         });
 
-        const completeDimension = dimensionAnswered === dimension.questions.length;
         rows += `
           <tr>
-            <td><strong>${key}</strong> —${dimension.name}</td>
-            <td>${completeDimension ? dimensionScore + " / " + dimension.max : "—"}</td>
-            <td>${completeDimension ? status(dimensionScore, dimension.max) : "Awaiting response"}</td>
+            <td><strong>${key}</strong> — ${dimension.name}</td>
+            <td>${dimensionScore} / ${dimension.max}</td>
+            <td>${status(dimensionScore, dimension.max)}</td>
           </tr>
         `;
       }
 
+      if (answered < 10) {
+        errorMsg.style.display = "block";
+        return;
+      }
+
+      errorMsg.style.display = "none";
       document.getElementById("totalScore").textContent = total;
       document.getElementById("dashboard").innerHTML = rows;
 
-      const result = assessmentResult(total, answered === 10);
+      const result = assessmentResult(total);
       document.getElementById("rating").textContent = result[0];
       document.getElementById("interpretation").textContent = result[1];
+
+      // Show Results and Scroll smoothly to them
+      resultsCard.style.display = "block";
+      resultsCard.scrollIntoView({ behavior: 'smooth' });
     }
 
-    form.addEventListener("change", updateScore);
-    form.addEventListener("reset", () => setTimeout(updateScore, 0));
-    updateScore();
+    function resetAssessment() {
+      resultsCard.style.display = "none";
+      errorMsg.style.display = "none";
+      setTimeout(updateProgress, 0);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    form.addEventListener("change", updateProgress);
   </script>
 </body>
 </html>
