@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEALTH Framework™ Assessment</title>
+  
+  <!-- PT Serif Font Import -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #0b1320;
+      --card-bg: #111a2e;
+      --accent-gold: #d4af37;
+      --accent-teal: #0f766e;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border-color: #1f293d;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Elegant Serif Heading Typography */
+    h1, h2, h3, .serif-font {
+      font-family: 'PT Serif', Georgia, serif;
+    }
+
+    header {
+      background: linear-gradient(180deg, #070c16 0%, var(--bg-color) 100%);
+      padding: 60px 20px 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .container {
+      width: min(840px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    header h1 {
+      margin: 0 0 12px;
+      font-size: 2.8rem;
+      letter-spacing: -0.5px;
+      color: #ffffff;
+    }
+
+    header p {
+      font-family: 'PT Serif', serif;
+      font-style: italic;
+      color: var(--accent-gold);
+      font-size: 1.15rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .intro {
+      margin: 32px 0;
+      padding: 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .intro strong {
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 0.85rem;
+      color: var(--accent-gold);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .intro p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .section {
+      margin: 28px 0;
+      padding: 32px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .letter {
+      font-family: 'PT Serif', serif;
+      color: var(--accent-gold);
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .question {
+      margin-top: 28px;
+    }
+
+    .question h3 {
+      margin: 0 0 6px;
+      font-size: 1.15rem;
+      color: #e5e7eb;
+      font-weight: 400;
+    }
+
+    .hint {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin: 0 0 12px;
+    }
+
+    select {
+      width: 100%;
+      margin-top: 8px;
+      padding: 14px 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: #0b1320;
+      color: #f3f4f6;
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      background-size: 16px;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    }
+
+    .results {
+      margin-top: 40px;
+      padding: 36px;
+      background: linear-gradient(180deg, #131f37 0%, var(--card-bg) 100%);
+      border: 1px solid var(--accent-gold);
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .results h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: #ffffff;
+    }
+
+    .score-number {
+      margin: 16px 0;
+      font-family: 'PT Serif', serif;
+      color: var(--accent-gold);
+      font-size: 3.8rem;
+      font-weight: 700;
+    }
+
+    #rating {
+      font-family: 'PT Serif', serif;
+      font-size: 1.35rem;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    #interpretation {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 24px;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 14px 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      color: var(--accent-gold);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    th:nth-child(2), td:nth-child(2),
+    th:nth-child(3), td:nth-child(3) {
+      text-align: right;
+    }
+
+    td { font-size: 0.9rem; }
+
+    button {
+      margin-top: 28px;
+      padding: 12px 28px;
+      border: 1px solid var(--accent-gold);
+      border-radius: 6px;
+      background: transparent;
+      color: var(--accent-gold);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    button:hover {
+      background: var(--accent-gold);
+      color: #0b1320;
+    }
+
+    main { padding-bottom: 60px; }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 2.1rem; }
+      .section, .results { padding: 20px; }
+      .score-number { font-size: 2.8rem; }
+      th, td { padding: 10px 4px; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>The WEALTH Framework™</h1>
+      <p>Is your equity working for your future, or is your future tied to a single stock?</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <strong>Executive Self-Assessment</strong>
+      <p>Select the option that best reflects your financial landscape. (Scale: 1 = Low Risk to 5 = High Concentration)</p>
+    </section>
+
+    <form id="wealthForm">
+
+      <!-- W SECTION -->
+      <section class="section">
+        <div class="section-heading"><span class="letter">W</span><h2>Wealth Concentration</h2></div>
+
+        <div class="question">
+          <h3>1. How much of your net worth consists of company stock?</h3>
+          <p class="hint">Include RSUs, options, vested shares, and private equity.</p>
+          <select name="q1">
+            <option value="">Select an option</option>
+            <option value="1">Under 10%</option>
+            <option value="2">10% – 25%</option>
+            <option value="3">25% – 50%</option>
+            <option value="4">50% – 75%</option>
+            <option value="5">Over 75%</option>
+          </select>
+        </div>
+
+        <div class="question">
+          <h3>2. What happens to your lifestyle if your company stock falls by 50%?</h3>
+          <select name="q2">
+            <option value="">Select an option</option>
+            <option value="1">Minimal to no impact</option>
+            <option value="2">A few secondary goals get delayed</option>
+            <option value="3">Requires notable spending adjustments</option>
+            <option value="4">Significantly reshapes my daily lifestyle</option>
+            <option value="5">Fundamentally alters my future plans</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- E SECTION -->
+      <section class="section">
+        <div class="section-heading"><span class="letter">E</span><h2>Employment Risk</h2></div>
+
+        <div class="question">
+          <h3>3. How reliant is your household income on this employer?</h3>
+          <select name="q3">
+            <option value="">Select an option</option>
+            <option value="1">No reliance (I no longer work here)</option>
+            <option value="2">Minor reliance (advisory or part-time income)</option>
+            <option value="3">Moderate reliance (~50% of household income)</option>
+            <option value="4">Heavy reliance (primary income source)</option>
+            <option value="5">Complete reliance (Salary, bonus, and stock all tied here)</option>
+          </select>
+        </div>
+
+        <div class="question">
+          <h3>4. If your equity turned into cash today, how would you allocate it?</h3>
+          <select name="q4">
+            <option value="">Select an option</option>
+            <option value="1">Diversify across a global portfolio</option>
+            <option value="2">Reinvest most of it elsewhere</option>
+            <option value="3">Split 50/50 between stock and new assets</option>
+            <option value="4">Keep most of it in company stock</option>
+            <option value="5">Reinvest all of it into company stock</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- A SECTION -->
+      <section class="section">
+        <div class="section-heading"><span class="letter">A</span><h2>Aspirations</h2></div>
+
+        <div class="question">
+          <h3>5. When do you plan to use this wealth?</h3>
+          <select name="q5">
+            <option value="">Select an option</option>
+            <option value="1">20+ years out</option>
+            <option value="2">10 – 20 years</option>
+            <option value="3">5 – 10 years</option>
+            <option value="4">2 – 5 years</option>
+            <option value="5">Within 2 years</option>
+          </select>
+        </div>
+
+        <div class="question">
+          <h3>6. What is your primary focus for this equity?</h3>
+          <select name="q6">
+            <option value="">Select an option</option>
+            <option value="1">Preserving wealth long-term</option>
+            <option value="2">Balancing steady growth with safety</option>
+            <option value="3">Growing wealth while managing downside risk</option>
+            <option value="4">Maximizing returns despite risk</option>
+            <option value="5">Haven't set a clear strategy yet</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- L SECTION -->
+      <section class="section">
+        <div class="section-heading"><span class="letter">L</span><h2>Liquidity &amp; Legacy</h2></div>
+
+        <div class="question">
+          <h3>7. Can you cover major cash needs without selling company stock?</h3>
+          <select name="q7">
+            <option value="">Select an option</option>
+            <option value="1">Easily — ample cash reserves outside stock</option>
+            <option value="2">Yes — with minimal effort</option>
+            <option value="3">Manageable — might need brief adjustments</option>
+            <option value="4">Difficult — would be forced to sell shares</option>
+            <option value="5">Impossible without selling stock</option>
+          </select>
+        </div>
+
+        <div class="question">
+          <h3>8. Is there a clear plan for your family to manage your equity if needed?</h3>
+          <select name="q8">
+            <option value="">Select an option</option>
+            <option value="1">Yes, fully documented with advisors</option>
+            <option value="2">Mostly, main details are covered</option>
+            <option value="3">Partially, but informal</option>
+            <option value="4">Unlikely, details aren't documented</option>
+            <option value="5">No plan in place</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- T SECTION -->
+      <section class="section">
+        <div class="section-heading"><span class="letter">T</span><h2>Tax Strategy</h2></div>
+
+        <div class="question">
+          <h3>9. How do you approach selling stock and managing taxes?</h3>
+          <select name="q9">
+            <option value="">Select an option</option>
+            <option value="1">Follow a written, tax-optimized plan</option>
+            <option value="2">Rebalance periodically with tax input</option>
+            <option value="3">Sell occasionally when cash is needed</option>
+            <option value="4">Delay selling because of tax worries</option>
+            <option value="5">No active tax strategy</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- H SECTION -->
+      <section class="section">
+        <div class="section-heading"><span class="letter">H</span><h2>Holistic Diversification</h2></div>
+
+        <div class="question">
+          <h3>10. How would you describe your overall investment portfolio?</h3>
+          <select name="q10">
+            <option value="">Select an option</option>
+            <option value="1">Broadly diversified globally across asset classes</option>
+            <option value="2">Mostly diversified with slight stock overlap</option>
+            <option value="3">Concentrated mostly in equities</option>
+            <option value="4">Very little diversification outside company stock</option>
+            <option value="5">Almost entirely tied to my employer</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- RESULTS DISPLAY -->
+      <section class="results">
+        <h2>Your WEALTH Score™</h2>
+        <div class="score-number"><span id="totalScore">0</span> <span style="font-size: 1.8rem; color: #6b7280;">/ 50</span></div>
+        <div id="rating">Complete all 10 questions to view assessment.</div>
+        <p id="interpretation">Your score will calculate automatically as you complete each field.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>Score</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="dashboard"></tbody>
+        </table>
+
+        <button type="reset">Reset Assessment</button>
+      </section>
+    </form>
+  </main>
+
+  <script>
+    const form = document.getElementById("wealthForm");
+
+    const dimensions = {
+      W: { name: "Wealth Concentration", questions: ["q1", "q2"], max: 10 },
+      E: { name: "Employment Risk", questions: ["q3", "q4"], max: 10 },
+      A: { name: "Aspirations", questions: ["q5", "q6"], max: 10 },
+      L: { name: "Liquidity & Legacy", questions: ["q7", "q8"], max: 10 },
+      T: { name: "Tax Strategy", questions: ["q9"], max: 5 },
+      H: { name: "Holistic Diversification", questions: ["q10"], max: 5 }
+    };
+
+    function status(score, max) {
+      if (score / max <= 0.4) return "Low Risk";
+      if (score / max <= 0.6) return "Moderate Risk";
+      if (score / max <= 0.8) return "Elevated Risk";
+      return "High Risk";
+    }
+
+    function assessmentResult(score, complete) {
+      if (!complete) {
+        return ["Complete all 10 questions to view assessment.",
+                "Your score will calculate automatically as you complete each field."];
+      }
+      if (score <= 15) return ["Fortress Portfolio", "Excellent diversification and structured risk control."];
+      if (score <= 22) return ["Well Positioned", "Solid balance between growth and risk. Keep monitoring concentration."];
+      if (score <= 30) return ["Growing Concentration", "Your wealth is increasingly reliant on one company."];
+      if (score <= 40) return ["Significant Concentration", "Your financial outlook is closely tied to your employer."];
+      return ["Critical Concentration", "High dependency on single-company stock across career and wealth."];
+    }
+
+    function updateScore() {
+      let total = 0;
+      let answered = 0;
+      let rows = "";
+
+      for (const [key, dimension] of Object.entries(dimensions)) {
+        let dimensionScore = 0;
+        let dimensionAnswered = 0;
+
+        dimension.questions.forEach(question => {
+          const value = Number(form.elements[question].value);
+          if (value) {
+            dimensionScore += value;
+            dimensionAnswered++;
+            total += value;
+            answered++;
+          }
+        });
+
+        const completeDimension = dimensionAnswered === dimension.questions.length;
+        rows += `
+          <tr>
+            <td><strong>${key}</strong> —${dimension.name}</td>
+            <td>${completeDimension ? dimensionScore + " / " + dimension.max : "—"}</td>
+            <td>${completeDimension ? status(dimensionScore, dimension.max) : "Awaiting response"}</td>
+          </tr>
+        `;
+      }
+
+      document.getElementById("totalScore").textContent = total;
+      document.getElementById("dashboard").innerHTML = rows;
+
+      const result = assessmentResult(total, answered === 10);
+      document.getElementById("rating").textContent = result[0];
+      document.getElementById("interpretation").textContent = result[1];
+    }
+
+    form.addEventListener("change", updateScore);
+    form.addEventListener("reset", () => setTimeout(updateScore, 0));
+    updateScore();
+  </script>
+</body>
+</html>
