@@ -10,8 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
+  <!-- GoatCounter Script with Fixed https: Protocol -->
   <script data-goatcounter="https://wealth-assessment.goatcounter.com/count"
-        async src="https://gc.zgo.at/count.js"></script>
+          async src="https://gc.zgo.at/count.js"></script>
+
   <style>
     :root {
       /* Softer, warm light theme to reduce eye strain */
@@ -549,7 +551,7 @@
           <tbody id="dashboard"></tbody>
         </table>
 
-        <button type="reset" class="btn-reset" onclick="resetAssessment()">Reset Assessment</button>
+        <button type="button" class="btn-reset" onclick="resetAssessment()">Reset Assessment</button>
       </section>
 
     </form>
@@ -638,9 +640,10 @@
     }
 
     function resetAssessment() {
+      form.reset();
       resultsCard.style.display = "none";
       errorMsg.style.display = "none";
-      setTimeout(updateProgress, 0);
+      updateProgress();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
