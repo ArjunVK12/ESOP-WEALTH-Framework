@@ -258,64 +258,80 @@
       background: #ffffff;
       border: 2px solid var(--accent-teal);
       border-radius: 12px;
-      text-align: center;
+      text-align: left;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
       scroll-margin-top: 70px;
     }
 
     .results h2 {
-      margin: 0;
+      margin: 0 0 6px;
       font-size: 1.8rem;
       color: var(--accent-navy);
-    }
-
-    .score-number {
-      margin: 12px 0;
-      font-family: 'PT Serif', serif;
-      color: var(--accent-teal);
-      font-size: 3.5rem;
-      font-weight: 700;
+      text-align: center;
     }
 
     #rating {
       font-family: 'PT Serif', serif;
-      font-size: 1.3rem;
-      color: var(--accent-navy);
+      font-size: 1.4rem;
+      color: var(--accent-teal);
       font-weight: bold;
-      margin-bottom: 4px;
+      text-align: center;
+      margin-bottom: 6px;
     }
 
     #interpretation {
       color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 24px;
+      font-size: 1rem;
+      margin-bottom: 28px;
+      text-align: center;
     }
 
-    table {
-      width: 100%;
-      margin-top: 20px;
-      border-collapse: collapse;
-      text-align: left;
+    .dashboard-card {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
     }
 
-    th, td {
-      padding: 12px 10px;
-      border-bottom: 1px solid var(--border-color);
+    .dashboard-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
     }
 
-    th {
-      color: var(--text-muted);
-      font-size: 0.75rem;
-      letter-spacing: 0.8px;
+    .dashboard-card-title {
+      font-family: 'PT Serif', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent-navy);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
       text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    th:nth-child(2), td:nth-child(2),
-    th:nth-child(3), td:nth-child(3) {
-      text-align: right;
+    .badge-low { background-color: #dcfce7; color: #15803d; }
+    .badge-moderate { background-color: #fef9c3; color: #a16207; }
+    .badge-elevated { background-color: #ffedd5; color: #c2410c; }
+    .badge-high { background-color: #fee2e2; color: #b91c1c; }
+
+    .dashboard-card-desc {
+      font-size: 0.92rem;
+      color: var(--text-main);
+      margin: 0;
     }
 
-    td { font-size: 0.9rem; }
+    .btn-reset-wrap {
+      text-align: center;
+    }
 
     .btn-reset {
       margin-top: 28px;
@@ -338,9 +354,9 @@
     @media (max-width: 600px) {
       header h1 { font-size: 2.1rem; }
       .section, .results { padding: 20px; }
-      .score-number { font-size: 2.8rem; }
       .nav-links { gap: 6px; }
       .nav-links a { font-size: 0.85rem; padding: 2px 4px; }
+      .dashboard-card-header { flex-direction: column; align-items: flex-start; gap: 6px; }
     }
   </style>
 </head>
@@ -381,8 +397,8 @@
         <div class="section-heading"><span class="letter">W</span><h2>Wealth Concentration</h2></div>
 
         <div class="question">
-          <h3>1. How much of your net worth consists of company stock?</h3>
-          <p class="hint">Include RSUs, options, vested shares, and private equity.</p>
+          <h3>1. How much of your overall net worth consists of company stock?</h3>
+          <p class="hint">Include ESOPs, RSUs, stock options, vested shares, and private/public holdings.</p>
           <select name="q1">
             <option value="">Select an option</option>
             <option value="1">Under 10%</option>
@@ -401,7 +417,7 @@
             <option value="2">A few secondary goals get delayed</option>
             <option value="3">Requires notable spending adjustments</option>
             <option value="4">Significantly reshapes my daily lifestyle</option>
-            <option value="5">Fundamentally alters my future plans</option>
+            <option value="5">Fundamentally alters my long-term future plans</option>
           </select>
         </div>
       </section>
@@ -414,23 +430,23 @@
           <h3>3. How reliant is your household income on this employer?</h3>
           <select name="q3">
             <option value="">Select an option</option>
-            <option value="1">No reliance (I no longer work here)</option>
-            <option value="2">Minor reliance (advisory or part-time income)</option>
-            <option value="3">Moderate reliance (~50% of household income)</option>
-            <option value="4">Heavy reliance (primary income source)</option>
-            <option value="5">Complete reliance (Salary, bonus, and stock all tied here)</option>
+            <option value="1">No reliance (I no longer work here / alternate income sources)</option>
+            <option value="2">Minor reliance (advisory, part-time, or secondary income)</option>
+            <option value="3">Moderate reliance (~50% of total household income)</option>
+            <option value="4">Heavy reliance (primary income source for household)</option>
+            <option value="5">Complete reliance (Salary, bonus, and stock all tied to one firm)</option>
           </select>
         </div>
 
         <div class="question">
-          <h3>4. If your equity turned into cash today, how would you allocate it?</h3>
+          <h3>4. If your company equity turned into cash today, how would you allocate it?</h3>
           <select name="q4">
             <option value="">Select an option</option>
-            <option value="1">Diversify across a global portfolio</option>
-            <option value="2">Reinvest most of it elsewhere</option>
-            <option value="3">Split 50/50 between stock and new assets</option>
-            <option value="4">Keep most of it in company stock</option>
-            <option value="5">Reinvest all of it into company stock</option>
+            <option value="1">Diversify across a well-balanced, multi-asset portfolio</option>
+            <option value="2">Reinvest most of it into alternative growth investments</option>
+            <option value="3">Split 50/50 between company stock and new assets</option>
+            <option value="4">Keep the majority reinvested in company stock</option>
+            <option value="5">Reinvest all of it back into company stock</option>
           </select>
         </div>
       </section>
@@ -440,7 +456,7 @@
         <div class="section-heading"><span class="letter">A</span><h2>Aspirations</h2></div>
 
         <div class="question">
-          <h3>5. When do you plan to use this wealth?</h3>
+          <h3>5. When do you plan to utilize or cash out this equity?</h3>
           <select name="q5">
             <option value="">Select an option</option>
             <option value="1">20+ years out</option>
@@ -452,14 +468,14 @@
         </div>
 
         <div class="question">
-          <h3>6. What is your primary focus for this equity?</h3>
+          <h3>6. What is your primary strategic focus for this equity?</h3>
           <select name="q6">
             <option value="">Select an option</option>
-            <option value="1">Preserving wealth long-term</option>
-            <option value="2">Balancing steady growth with safety</option>
-            <option value="3">Growing wealth while managing downside risk</option>
-            <option value="4">Maximizing returns despite risk</option>
-            <option value="5">Haven't set a clear strategy yet</option>
+            <option value="1">Preserving overall wealth long-term</option>
+            <option value="2">Balancing steady growth with capital preservation</option>
+            <option value="3">Growing wealth while managing downside exposure</option>
+            <option value="4">Maximizing upside returns despite high volatility</option>
+            <option value="5">Haven't established a clear strategy yet</option>
           </select>
         </div>
       </section>
@@ -469,26 +485,26 @@
         <div class="section-heading"><span class="letter">L</span><h2>Liquidity &amp; Legacy</h2></div>
 
         <div class="question">
-          <h3>7. Can you cover major cash needs without selling company stock?</h3>
+          <h3>7. Can you cover major planned cash needs without selling company stock?</h3>
           <select name="q7">
             <option value="">Select an option</option>
-            <option value="1">Easily — ample cash reserves outside stock</option>
-            <option value="2">Yes — with minimal effort</option>
-            <option value="3">Manageable — might need brief adjustments</option>
-            <option value="4">Difficult — would be forced to sell shares</option>
-            <option value="5">Impossible without selling stock</option>
+            <option value="1">Easily — ample cash and liquid assets outside company stock</option>
+            <option value="2">Yes — with minimal effort and planning</option>
+            <option value="3">Manageable — might require minor cash flow adjustments</option>
+            <option value="4">Difficult — would likely be forced to sell equity</option>
+            <option value="5">Impossible without selling company stock</option>
           </select>
         </div>
 
         <div class="question">
-          <h3>8. Is there a clear plan for your family to manage your equity if needed?</h3>
+          <h3>8. Is there a clear plan for your family to manage/exercise your equity if needed?</h3>
           <select name="q8">
             <option value="">Select an option</option>
-            <option value="1">Yes, fully documented with advisors</option>
-            <option value="2">Mostly, main details are covered</option>
-            <option value="3">Partially, but informal</option>
-            <option value="4">Unlikely, details aren't documented</option>
-            <option value="5">No plan in place</option>
+            <option value="1">Yes, fully documented with legal structures and advisors</option>
+            <option value="2">Mostly, key details and exercise terms are documented</option>
+            <option value="3">Partially, discussed informally with family</option>
+            <option value="4">Unlikely, key rules and deadlines aren't documented</option>
+            <option value="5">No legacy or contingency plan in place</option>
           </select>
         </div>
       </section>
@@ -498,14 +514,14 @@
         <div class="section-heading"><span class="letter">T</span><h2>Tax Strategy</h2></div>
 
         <div class="question">
-          <h3>9. How do you approach selling stock and managing taxes?</h3>
+          <h3>9. How do you approach tax planning when exercising or selling stock?</h3>
           <select name="q9">
             <option value="">Select an option</option>
-            <option value="1">Follow a written, tax-optimized plan</option>
-            <option value="2">Rebalance periodically with tax input</option>
-            <option value="3">Sell occasionally when cash is needed</option>
-            <option value="4">Delay selling because of tax worries</option>
-            <option value="5">No active tax strategy</option>
+            <option value="1">Follow a systematic, tax-optimized schedule (e.g. staggering sales)</option>
+            <option value="2">Rebalance periodically with guidance from a tax advisor</option>
+            <option value="3">Sell occasionally on an ad-hoc basis when cash is needed</option>
+            <option value="4">Delay selling mainly out of concern for tax liabilities</option>
+            <option value="5">No active tax strategy in place</option>
           </select>
         </div>
       </section>
@@ -515,43 +531,35 @@
         <div class="section-heading"><span class="letter">H</span><h2>Holistic Diversification</h2></div>
 
         <div class="question">
-          <h3>10. How would you describe your overall investment portfolio?</h3>
+          <h3>10. How would you describe your total asset allocation outside company equity?</h3>
           <select name="q10">
             <option value="">Select an option</option>
-            <option value="1">Broadly diversified globally across asset classes</option>
-            <option value="2">Mostly diversified with slight stock overlap</option>
-            <option value="3">Concentrated mostly in equities</option>
-            <option value="4">Very little diversification outside company stock</option>
-            <option value="5">Almost entirely tied to my employer</option>
+            <option value="1">Broadly diversified across multiple asset classes and geographies</option>
+            <option value="2">Well-diversified with slight overlap in employer industry</option>
+            <option value="3">Concentrated mostly in equities with limited asset diversity</option>
+            <option value="4">Very little investment diversification outside company equity</option>
+            <option value="5">Almost all financial net worth is tied to employer performance</option>
           </select>
         </div>
       </section>
 
       <!-- Submit Action Button Area -->
       <div class="action-area">
-        <button type="button" class="btn-submit" onclick="calculateScore()">Calculate My WEALTH Score</button>
-        <div id="errorMsg" class="error-msg">Please answer all 10 questions before calculating your score.</div>
+        <button type="button" class="btn-submit" onclick="calculateScore()">Analyze My WEALTH Profile</button>
+        <div id="errorMsg" class="error-msg">Please answer all 10 questions before generating your assessment profile.</div>
       </div>
 
       <!-- RESULTS DISPLAY (Hidden initially) -->
       <section id="resultsCard" class="results">
-        <h2>Your WEALTH Score™</h2>
-        <div class="score-number"><span id="totalScore">0</span> <span style="font-size: 1.6rem; color: var(--text-muted);">/ 50</span></div>
-        <div id="rating">Assessment Complete</div>
-        <p id="interpretation">Interpretation will appear here.</p>
+        <h2>Your WEALTH Assessment Profile</h2>
+        <div id="rating">Profile Analysis</div>
+        <p id="interpretation">Summary interpretation will appear here.</p>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Dimension</th>
-              <th>Score</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="dashboard"></tbody>
-        </table>
+        <div id="qualitativeDashboard"></div>
 
-        <button type="button" class="btn-reset" onclick="resetAssessment()">Reset Assessment</button>
+        <div class="btn-reset-wrap">
+          <button type="button" class="btn-reset" onclick="resetAssessment()">Reset Assessment</button>
+        </div>
       </section>
 
     </form>
@@ -580,25 +588,79 @@
       progressCount.textContent = answered;
     }
 
-    function status(score, max) {
-      if (score / max <= 0.4) return "Low Risk";
-      if (score / max <= 0.6) return "Moderate Risk";
-      if (score / max <= 0.8) return "Elevated Risk";
-      return "High Risk";
+    function getDimensionStatus(score, max) {
+      const ratio = score / max;
+      if (ratio <= 0.4) return { label: "Low Exposure", class: "badge-low" };
+      if (ratio <= 0.6) return { label: "Moderate Risk", class: "badge-moderate" };
+      if (ratio <= 0.8) return { label: "Elevated Vulnerability", class: "badge-elevated" };
+      return { label: "High Concentration", class: "badge-high" };
     }
 
-    function assessmentResult(score) {
-      if (score <= 15) return ["Fortress Portfolio", "Excellent diversification and structured risk control."];
-      if (score <= 22) return ["Well Positioned", "Solid balance between growth and risk. Keep monitoring concentration."];
-      if (score <= 30) return ["Growing Concentration", "Your wealth is increasingly reliant on one company."];
-      if (score <= 40) return ["Significant Concentration", "Your financial outlook is closely tied to your employer."];
-      return ["Critical Concentration", "High dependency on single-company stock across career and wealth."];
+    function getSubjectiveDescription(key, score, max) {
+      const ratio = score / max;
+
+      const descriptions = {
+        W: {
+          low: "Your wealth is well-insulated from company stock price fluctuations, providing strong capital protection.",
+          mod: "Company equity represents a notable portion of your net worth; price swings will impact secondary goals.",
+          ele: "Significant net worth concentration. A drop in stock value will require visible lifestyle adjustments.",
+          high: "Critical stock concentration. Your financial independence is currently tied directly to a single stock."
+        },
+        E: {
+          low: "Low double-dipping risk. Your household income and balance sheet are decoupled from your employer.",
+          mod: "Moderate alignment between career and wealth. Loss of job or stock slump is manageable.",
+          ele: "Heightened dual-exposure: both your regular earnings and asset growth rely heavily on your employer.",
+          high: "Maximum single-point sensitivity. A company downturn simultaneously threatens salary, bonus, and equity."
+        },
+        A: {
+          low: "Your investment horizon and capital preservation goals are fully aligned with a structured plan.",
+          mod: "Reasonable alignment between timeline and risk, though clearer downside buffers may be required.",
+          ele: "Short-to-medium timeline with elevated risk. Equity volatility could disrupt near-term financial milestones.",
+          high: "Mismatched aspirations. High dependency on volatile equity to meet imminent life goals or timeline."
+        },
+        L: {
+          low: "Strong liquidity reserves and well-documented legacy plans ensure complete operational safety.",
+          mod: "Decent liquidity, though legacy and exercise contingencies require formal documentation.",
+          ele: "Tight liquidity reserves. You may be forced to liquidate equity abruptly during unforeseen cash demands.",
+          high: "Severe liquidity lock-in with unaddressed estate planning risks for family members."
+        },
+        T: {
+          low: "Systematic, tax-aware exercise and realization strategy actively protects your realized gains.",
+          mod: "Periodic tax rebalancing is present, though further proactive tax scheduling could reduce leakages.",
+          ele: "Inaction or tax hesitation is delaying prudent profit-taking and portfolio diversification.",
+          high: "Absence of a structured tax strategy leaves substantial value vulnerable to inefficient realizations."
+        },
+        H: {
+          low: "Highly diversified multi-asset allocation provides solid global risk management and smooth returns.",
+          mod: "Good broader portfolio foundation, though minor sector or industry overlaps exist.",
+          ele: "Concentrated core asset base. External investments closely resemble employer industry risks.",
+          high: "Minimal asset diversification outside employer stock. High portfolio single-stock vulnerability."
+        }
+      };
+
+      if (ratio <= 0.4) return descriptions[key].low;
+      if (ratio <= 0.6) return descriptions[key].mod;
+      if (ratio <= 0.8) return descriptions[key].ele;
+      return descriptions[key].high;
+    }
+
+    function getOverallSummary(totalRatio) {
+      if (totalRatio <= 0.35) {
+        return ["Fortress Profile", "Your wealth exhibits high diversification and strong risk separation from your employer."];
+      } else if (totalRatio <= 0.55) {
+        return ["Balanced Growth Profile", "Solid financial positioning with moderate exposure; periodic rebalancing will keep you on track."];
+      } else if (totalRatio <= 0.75) {
+        return ["Concentrated Exposure Profile", "Your financial trajectory is increasingly linked to a single company's performance."];
+      } else {
+        return ["Single-Point Vulnerability Profile", "High operational and balance-sheet dependency on one firm. Proactive risk mitigation recommended."];
+      }
     }
 
     function calculateScore() {
-      let total = 0;
+      let totalScore = 0;
+      let totalMax = 50;
       let answered = 0;
-      let rows = "";
+      let cardsHtml = "";
 
       for (const [key, dimension] of Object.entries(dimensions)) {
         let dimensionScore = 0;
@@ -607,17 +669,22 @@
           const value = Number(form.elements[question].value);
           if (value) {
             dimensionScore += value;
-            total += value;
+            totalScore += value;
             answered++;
           }
         });
 
-        rows += `
-          <tr>
-            <td><strong>${key}</strong> — ${dimension.name}</td>
-            <td>${dimensionScore} / ${dimension.max}</td>
-            <td>${status(dimensionScore, dimension.max)}</td>
-          </tr>
+        const statusInfo = getDimensionStatus(dimensionScore, dimension.max);
+        const description = getSubjectiveDescription(key, dimensionScore, dimension.max);
+
+        cardsHtml += `
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <span class="dashboard-card-title">${key} — ${dimension.name}</span>
+              <span class="badge ${statusInfo.class}">${statusInfo.label}</span>
+            </div>
+            <p class="dashboard-card-desc">${description}</p>
+          </div>
         `;
       }
 
@@ -627,12 +694,11 @@
       }
 
       errorMsg.style.display = "none";
-      document.getElementById("totalScore").textContent = total;
-      document.getElementById("dashboard").innerHTML = rows;
+      document.getElementById("qualitativeDashboard").innerHTML = cardsHtml;
 
-      const result = assessmentResult(total);
-      document.getElementById("rating").textContent = result[0];
-      document.getElementById("interpretation").textContent = result[1];
+      const overall = getOverallSummary(totalScore / totalMax);
+      document.getElementById("rating").textContent = overall[0];
+      document.getElementById("interpretation").textContent = overall[1];
 
       // Show Results and Scroll smoothly to them
       resultsCard.style.display = "block";
